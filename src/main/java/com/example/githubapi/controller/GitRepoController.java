@@ -5,9 +5,14 @@ import com.example.githubapi.error.ErrorResponse;
 import com.example.githubapi.service.GitRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+
+import java.util.Collections;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/repositories")
@@ -38,6 +43,7 @@ public class GitRepoController {
         }  else if ("application/xml".equalsIgnoreCase(acceptHeader)) {
             // Return 406 response for unsupported media type
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+                    .contentType(MediaType.APPLICATION_JSON)
                     .body(createErrorResponse(406, "Not acceptable media type"));
         } else {
             // Return 400 response for unsupported media type
