@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 @RestController
 @RequestMapping("/repositories")
@@ -25,8 +26,15 @@ public class GitRepoController {
             @RequestHeader("Accept") String acceptHeader
     ) {
         if ("application/json".equalsIgnoreCase(acceptHeader)) {
-            // Call the GitHub service to retrieve repositories in JSON format
-            return ResponseEntity.ok(repoService.getRepositories(username));
+            try {
+                // Call the GitHub service to retrieve repositories in JSON format
+                return ResponseEntity.ok(repoService.getRepositories(username));
+            }
+            catch (HttpClientErrorException e) {
+                // Return 404 response for non-existent GitHub user
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(createErrorResponse(404, "Non-existent Github user"));
+            }
         }  else if ("application/xml".equalsIgnoreCase(acceptHeader)) {
             // Return 406 response for unsupported media type
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)

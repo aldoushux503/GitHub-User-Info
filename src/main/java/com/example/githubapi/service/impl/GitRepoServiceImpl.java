@@ -4,7 +4,10 @@ package com.example.githubapi.service.impl;
 import com.example.githubapi.entity.Branch;
 import com.example.githubapi.entity.GitHubRepository;
 import com.example.githubapi.service.GitRepoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -18,7 +21,13 @@ public class GitRepoServiceImpl implements GitRepoService {
         String apiUrl = "https://api.github.com/users/" + username + "/repos";
 
         RestTemplate restTemplate = new RestTemplate();
-        GitHubRepository[] repositories = restTemplate.getForObject(apiUrl, GitHubRepository[].class);
+        GitHubRepository[] repositories;
+        try {
+            repositories = restTemplate.getForObject(apiUrl, GitHubRepository[].class);
+        } catch (HttpClientErrorException e) {
+            throw new HttpClientErrorException(HttpStatus.NOT_FOUND, "Not Found");
+        }
+
 
         List<GitHubRepository> filteredRepositories = new ArrayList<>();
 
