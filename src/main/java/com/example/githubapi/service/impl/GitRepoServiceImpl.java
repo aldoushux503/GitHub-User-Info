@@ -24,7 +24,8 @@ public class GitRepoServiceImpl implements GitRepoService {
         if (repositories != null) {
             for (GitHubRepository repository : repositories) {
                 if (!repository.isFork()) {
-
+                    GitHubRepository detailedRepository = getRepositoryDetails(repository);
+                    filteredRepositories.add(detailedRepository);
                 }
             }
         }
@@ -32,5 +33,10 @@ public class GitRepoServiceImpl implements GitRepoService {
         return filteredRepositories;
     }
 
+    private GitHubRepository getRepositoryDetails(GitHubRepository repository) {
+        String apiUrl = "https://api.github.com/repos/" + repository.getFull_name() + "/branches";
 
+
+        return repository;
+    }
 }
