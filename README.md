@@ -32,6 +32,44 @@ mvn spring-boot:run
 ## Usage 
 Once the program is running, you can use it to retrieve a user's repositories and their branches. The program exposes a REST API with the following endpoint:
 
+Request:
+- GET /repositories/{username} 
+  - Path Parameters:
+    - {username}: The username of the GitHub user.
+  - Request Headers:
+    - Accept: The media type of the response. Supported values are application/json and application/xml.
+    
+Response: <br />
+The response format depends on the Accept header provided in the request.
+- If the Accept header is application/xml, an error will be returned because this format is not implemented in the program.
+Example Response:
+```json
+{
+    "status": 406,
+    "message": "Not acceptable media type"
+}
+```
+- If the Accept header is application/json, the response will be a JSON object containing the user's repositories.
+Example Response:
+```json
+[
+    {
+        "name": "aldoushux503",
+        "owner": {
+            "login": "aldoushux503"
+        },
+        "branches": [
+            {
+                "name": "main",
+                "commit": {
+                    "sha": "d38137b81409f1313084bc2bcf9dd1c023c2ca51",
+                    "url": "https://api.github.com/repos/aldoushux503/aldoushux503/commits/d38137b81409f1313084bc2bcf9dd1c023c2ca51"
+                }
+            }
+        ]
+    }
+]
+```
 
 ## Error Handling
 
