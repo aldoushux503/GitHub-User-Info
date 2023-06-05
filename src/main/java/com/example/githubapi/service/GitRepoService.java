@@ -1,6 +1,8 @@
 package com.example.githubapi.service;
 
 
-public interface GitRepoService {
+import java.util.List;
 
+public interface GitRepoService {
+    List<?> getRepositories(String username);
 }

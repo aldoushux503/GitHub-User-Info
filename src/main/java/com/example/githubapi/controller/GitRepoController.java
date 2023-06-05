@@ -23,8 +23,16 @@ public class GitRepoController {
             @PathVariable String username,
             @RequestHeader("Accept") String acceptHeader
     ) {
-
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if ("application/json".equalsIgnoreCase(acceptHeader)) {
+            // Call the GitHub service to retrieve repositories in JSON format
+            return ResponseEntity.ok(repoService.getRepositories(username));
+        } else if ("application/xml".equalsIgnoreCase(acceptHeader)) {
+            // Return 406 response for unsupported media type
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        } else {
+            // Return 400 response for unsupported media type
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
 
