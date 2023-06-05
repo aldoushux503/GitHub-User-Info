@@ -1,6 +1,7 @@
 package com.example.githubapi.controller;
 
 
+import com.example.githubapi.error.ErrorResponse;
 import com.example.githubapi.service.GitRepoService;
 import com.example.githubapi.service.impl.GitRepoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +27,23 @@ public class GitRepoController {
         if ("application/json".equalsIgnoreCase(acceptHeader)) {
             // Call the GitHub service to retrieve repositories in JSON format
             return ResponseEntity.ok(repoService.getRepositories(username));
-        } else if ("application/xml".equalsIgnoreCase(acceptHeader)) {
+        }  else if ("application/xml".equalsIgnoreCase(acceptHeader)) {
             // Return 406 response for unsupported media type
-            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE)
+                    .body(createErrorResponse(406, "Not acceptable media type"));
         } else {
             // Return 400 response for unsupported media type
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(createErrorResponse(400, "Invalid Accept header"));
         }
     }
 
+
+    private ErrorResponse createErrorResponse(int status, String message) {
+        ErrorResponse errorResponse = new ErrorResponse();
+        errorResponse.setStatus(status);
+        errorResponse.setMessage(message);
+        return errorResponse;
+    }
 
 }
