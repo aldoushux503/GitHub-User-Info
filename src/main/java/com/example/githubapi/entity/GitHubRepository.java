@@ -18,6 +18,8 @@ public class GitHubRepository {
 
     private Owner owner;
 
+    private List<Branch> branches;
+
     private boolean fork;
 
     private String full_name;

@@ -1,6 +1,7 @@
 package com.example.githubapi.service.impl;
 
 
+import com.example.githubapi.entity.Branch;
 import com.example.githubapi.entity.GitHubRepository;
 import com.example.githubapi.service.GitRepoService;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,9 @@ public class GitRepoServiceImpl implements GitRepoService {
     private GitHubRepository getRepositoryDetails(GitHubRepository repository) {
         String apiUrl = "https://api.github.com/repos/" + repository.getFull_name() + "/branches";
 
+        RestTemplate restTemplate = new RestTemplate();
+        Branch[] branches = restTemplate.getForObject(apiUrl, Branch[].class);
+        repository.setBranches(Arrays.asList(branches));
 
         return repository;
     }
