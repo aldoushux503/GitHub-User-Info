@@ -16,7 +16,7 @@ Please follow these steps to install and run the program:
 git clone https://github.com/aldoushux503/GitHub-User-Info.git
 ```
 
-2. Navigate to the project directory::
+2. Navigate to the project directory:
 ```shell
 cd GitHub-User-Info
 ```
