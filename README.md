@@ -41,7 +41,7 @@ Request:
     
 Response: <br />
 The response format depends on the Accept header provided in the request.
-- If the Accept header is application/xml, an error will be returned because this format is not implemented in the program.
+- If the Accept header is application/xml, an error will be returned because this format is not currently implemented in the program.
 Example Response:
 ```json
 {
