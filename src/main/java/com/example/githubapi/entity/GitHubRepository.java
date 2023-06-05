@@ -20,8 +20,10 @@ public class GitHubRepository {
 
     private List<Branch> branches;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private boolean fork;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String full_name;
 }
 
