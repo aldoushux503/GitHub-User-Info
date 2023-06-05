@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/repositories")
-public class GitHubRepoController {
+public class GitRepoController {
 
 }
