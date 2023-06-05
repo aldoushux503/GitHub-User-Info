@@ -3,7 +3,6 @@ package com.example.githubapi.controller;
 
 import com.example.githubapi.error.ErrorResponse;
 import com.example.githubapi.service.GitRepoService;
-import com.example.githubapi.service.impl.GitRepoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,7 @@ public class GitRepoController {
 
     private final GitRepoService repoService;
 
+    @Autowired
     public GitRepoController(GitRepoService repoService) {
         this.repoService = repoService;
     }

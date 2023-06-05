@@ -7,12 +7,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class GitRepoServiceImpl implements GitRepoService {
     @Override
-    public List<?> getRepositories(String username) {
+    public List<GitHubRepository> getRepositories(String username) {
         String apiUrl = "https://api.github.com/users/" + username + "/repos";
 
         RestTemplate restTemplate = new RestTemplate();
@@ -30,4 +31,6 @@ public class GitRepoServiceImpl implements GitRepoService {
 
         return filteredRepositories;
     }
+
+
 }

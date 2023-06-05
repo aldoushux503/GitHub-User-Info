@@ -16,7 +16,10 @@ public class GitHubRepository {
 
     private String name;
 
+    private Owner owner;
 
     private boolean fork;
+
+    private String full_name;
 }
 
