@@ -8,12 +8,13 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.reactive.function.client.WebClientException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(HttpClientErrorException.class)
-    public ResponseEntity<ExceptionResponse> handleNotFoundException(HttpClientErrorException ex) {
+    @ExceptionHandler(WebClientException.class)
+    public ResponseEntity<ExceptionResponse> handleWebClientResponseException(WebClientException ex) {
         ExceptionResponse exceptionResponse = createErrorResponse(404, "Non-existent Github user");
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
@@ -34,6 +35,15 @@ public class GlobalExceptionHandler {
         ExceptionResponse exceptionResponse = createErrorResponse(400, "Invalid Accept header");
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
+                .body(exceptionResponse);
+    }
+
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionResponse> handleMediaTypeNotSupportedException(Exception ex) {
+        ExceptionResponse exceptionResponse = createErrorResponse(500, "Invalid Accept header");
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(exceptionResponse);
     }
 
