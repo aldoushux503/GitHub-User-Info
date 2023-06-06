@@ -4,6 +4,7 @@ package com.example.githubapi.service.impl;
 import com.example.githubapi.entity.Branch;
 import com.example.githubapi.entity.GitHubRepository;
 import com.example.githubapi.service.GitRepoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,18 @@ import java.util.List;
 
 @Service
 public class GitRepoServiceImpl implements GitRepoService {
+
+    private final RestTemplate restTemplate;
+
+    @Autowired
+    public GitRepoServiceImpl(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
+
     @Override
     public List<GitHubRepository> getRepositories(String username) {
         String apiUrl = "https://api.github.com/users/" + username + "/repos";
 
-        RestTemplate restTemplate = new RestTemplate();
         GitHubRepository[] repositories;
         try {
             repositories = restTemplate.getForObject(apiUrl, GitHubRepository[].class);
@@ -46,7 +54,6 @@ public class GitRepoServiceImpl implements GitRepoService {
     private GitHubRepository getRepositoryDetails(GitHubRepository repository) {
         String apiUrl = "https://api.github.com/repos/" + repository.getFull_name() + "/branches";
 
-        RestTemplate restTemplate = new RestTemplate();
         Branch[] branches = restTemplate.getForObject(apiUrl, Branch[].class);
         repository.setBranches(Arrays.asList(branches));
 
