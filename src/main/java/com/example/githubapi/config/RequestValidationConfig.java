@@ -17,8 +17,8 @@ public class RequestValidationConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void addInterceptors(InterceptorRegistry registery) {
-        registery.addInterceptor(requestInterceptor);
+    public void addInterceptors(InterceptorRegistry register) {
+        register.addInterceptor(requestInterceptor);
     }
 
 }
