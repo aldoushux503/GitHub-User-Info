@@ -1,18 +1,15 @@
 package com.example.githubapi.controller;
 
 
-import com.example.githubapi.error.ErrorResponse;
+import com.example.githubapi.exception.ErrorResponse;
+import com.example.githubapi.exception.ExceptionResponse;
 import com.example.githubapi.service.GitRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.HttpMediaTypeNotAcceptableException;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
-
-import java.util.Collections;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/repositories")
@@ -53,8 +50,8 @@ public class GitRepoController {
     }
 
 
-    private ErrorResponse createErrorResponse(int status, String message) {
-        ErrorResponse errorResponse = new ErrorResponse();
+    private ExceptionResponse createErrorResponse(int status, String message) {
+        ExceptionResponse errorResponse = new ExceptionResponse();
         errorResponse.setStatus(status);
         errorResponse.setMessage(message);
         return errorResponse;

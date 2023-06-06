@@ -1,4 +1,4 @@
-package com.example.githubapi.error;
+package com.example.githubapi.exception;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter @Setter
 @NoArgsConstructor
-public class ErrorResponse {
+public class ExceptionResponse {
     private int status;
     private String message;
 }

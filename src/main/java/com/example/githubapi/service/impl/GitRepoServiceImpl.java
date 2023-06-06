@@ -6,7 +6,6 @@ import com.example.githubapi.entity.GitHubRepository;
 import com.example.githubapi.service.GitRepoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
