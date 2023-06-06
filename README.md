@@ -6,7 +6,7 @@ This repository contains a Java program that interacts with the GitHub API to re
 
 To run this program, you need to have the following prerequisites:
 
-- [JDK 8+](https://www.oracle.com/java/technologies/downloads/)
+- [JDK 16+](https://www.oracle.com/java/technologies/downloads/)
 - [Maven](https://maven.apache.org/)
 
 Please follow these steps to install and run the program:
