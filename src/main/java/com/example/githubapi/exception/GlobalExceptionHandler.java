@@ -30,18 +30,9 @@ public class GlobalExceptionHandler {
                 .body(exceptionResponse);
     }
 
-    @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResponseEntity<ExceptionResponse> handleMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException ex) {
-        ExceptionResponse exceptionResponse = createErrorResponse(400, "Invalid Accept header");
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(exceptionResponse);
-    }
-
-
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionResponse> handleMediaTypeNotSupportedException(Exception ex) {
-        ExceptionResponse exceptionResponse = createErrorResponse(500, "Invalid Accept header");
+    public ResponseEntity<ExceptionResponse> handleInternalServerError(Exception ex) {
+        ExceptionResponse exceptionResponse = createErrorResponse(500, ex.getMessage());
         return ResponseEntity
                 .status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(exceptionResponse);
