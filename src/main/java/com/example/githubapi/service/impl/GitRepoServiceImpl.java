@@ -34,8 +34,9 @@ public class GitRepoServiceImpl implements GitRepoService {
     }
 
     private Mono<GitHubRepository> getRepositoryDetails(GitHubRepository repository) {
+        String link = "repos/" + repository.getFull_name() + "/branches";
         return webClient.get()
-                .uri("repos/{fullName}/branches", repository.getFull_name())
+                .uri(link)
                 .retrieve()
                 .bodyToFlux(Branch.class)
                 .collectList()
