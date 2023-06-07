@@ -76,7 +76,6 @@ Example Response:
 The program handles various error scenarios and returns appropriate responses:
 - If the specified GitHub user does not exist, the program returns a `404 Not Found` response with an error message.
 - If the `Accept` header is set to an unsupported media type, the program returns a `406 Not Acceptable` response with an error message.
-- If the `Accept` header is missing or invalid, the program returns a `400 Bad Request` response with an error message.
 
 ## Libraries Used
 The program utilizes the following libraries:
